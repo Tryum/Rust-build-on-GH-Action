@@ -19,4 +19,10 @@ jobs:
     - name: Install Nightly Toolchain
       run: rustup toolchain install nightly
     - name: Build
-      run: cargo +nightly build --verbose
+      run: cargo +nightly build --verbose --release
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Release Build
+        path: target/release
+        retention-days: 5
