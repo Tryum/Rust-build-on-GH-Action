@@ -19,7 +19,7 @@ jobs:
     - name: Install Nightly Toolchain
       run: rustup toolchain install nightly
     - name: Build
-      run: cargo +nightly build --verbose --release
+      run: .scripts\build.ps1
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
