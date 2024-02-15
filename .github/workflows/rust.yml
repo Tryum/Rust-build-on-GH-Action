@@ -16,6 +16,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Install Cap'n Proto
+      run: choco install capnproto
+    - name: run capnp.exe --help
+      run: capnp.exe --help
     - name: Install Nightly Toolchain
       run: rustup toolchain install nightly
     - name: Build
