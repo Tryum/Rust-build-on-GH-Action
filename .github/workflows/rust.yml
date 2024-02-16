@@ -27,7 +27,8 @@ jobs:
       env:
         rust_channel: ${{ matrix.rust_channel }}
     - name: Get Version
-      run: Write-Host "APP_VERSION=$(git describe --tags)" >> "$GITHUB_ENV"
+      run: |
+        "APP_VERSION=$(git describe --tags)" | Out-File -FilePath $env:GITHUB_ENV -Append
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
