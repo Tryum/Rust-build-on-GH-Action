@@ -28,6 +28,7 @@ jobs:
         rust_channel: ${{ matrix.rust_channel }}
     - name: Get Version
       run: |
+        git fetch --prune --unshallow --tags
         "APP_VERSION=$(git describe --tags)" | Out-File -FilePath $env:GITHUB_ENV -Append
 
     - name: Upload artifact
