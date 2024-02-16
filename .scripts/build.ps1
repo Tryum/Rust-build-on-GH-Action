@@ -7,4 +7,4 @@ if ($env:rust_channel -eq "nighly") {
     $build_channel = "+nightly"
 }
 
-cargo $build_channel build --verbose --release
+cargo build $build_channel --verbose --release
