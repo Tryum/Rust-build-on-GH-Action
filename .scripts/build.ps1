@@ -2,7 +2,7 @@
 
 Write-Host "Building with rust channel : $env:rust_channel"
 
-if ($env:rust_channel -eq "nighly") {
+if ($env:rust_channel -eq "nightly") {
     $build_channel = "+nightly"
 }
 
