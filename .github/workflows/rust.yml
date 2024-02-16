@@ -9,7 +9,7 @@ jobs:
   client_matrix:
     strategy:
       matrix:
-        rust_channel: [stable, nightly]
+        rust_channel: ["stable", "nightly"]
 
     runs-on: windows-latest
 
@@ -19,8 +19,8 @@ jobs:
       run: choco install capnproto
     - name: run capnp.exe --help
       run: capnp.exe --help
-    - name: Install Nightly Toolchain
-      if: ${{ matrix.rust_channel }} == nightly
+    - if: matrix.rust_channel == 'nightly'
+      name: Install Nightly Toolchain
       run: rustup toolchain install nightly
     - name: Build
       run: .scripts\build.ps1
