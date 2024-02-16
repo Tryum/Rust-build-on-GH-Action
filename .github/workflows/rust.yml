@@ -6,7 +6,10 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  client_matrix:
+    strategy:
+      matrix:
+        rust_version: [stable, nightly]
 
     runs-on: windows-latest
 
@@ -17,12 +20,13 @@ jobs:
     - name: run capnp.exe --help
       run: capnp.exe --help
     - name: Install Nightly Toolchain
+      if: ${{ matrix.rust_version }} == rust_version
       run: rustup toolchain install nightly
     - name: Build
-      run: .scripts\build.ps1
+      run: .scripts\build-${{ matrix.rust_version }}.ps1
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: Release Build
+        name: Release Build-${{ matrix.rust_version }}
         path: target/release
         retention-days: 5
