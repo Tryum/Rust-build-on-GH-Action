@@ -9,7 +9,7 @@ jobs:
   client_matrix:
     strategy:
       matrix:
-        rust_version: [stable, nightly]
+        rust_channel: [stable, nightly]
 
     runs-on: windows-latest
 
@@ -20,13 +20,15 @@ jobs:
     - name: run capnp.exe --help
       run: capnp.exe --help
     - name: Install Nightly Toolchain
-      if: ${{ matrix.rust_version }} == rust_version
+      if: ${{ matrix.rust_channel }} == nightly
       run: rustup toolchain install nightly
     - name: Build
-      run: .scripts\build-${{ matrix.rust_version }}.ps1
+      run: .scripts\build.ps1
+      env:
+        rust_channel: ${{ matrix.rust_channel }}
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: Release Build-${{ matrix.rust_version }}
+        name: Release Build-${{ matrix.rust_channel }}
         path: target/release
         retention-days: 5

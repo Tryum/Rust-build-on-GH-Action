@@ -1,1 +1,0 @@
-cargo build --verbose --release
