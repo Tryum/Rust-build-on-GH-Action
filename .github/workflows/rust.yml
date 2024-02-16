@@ -34,6 +34,6 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: Release Build-$APP_VERSION-${{ matrix.rust_channel }}
+        name: Release Build-${{ env.APP_VERSION }}-${{ matrix.rust_channel }}
         path: target/release
         retention-days: 5
