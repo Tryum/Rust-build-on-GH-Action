@@ -4,6 +4,9 @@ on: workflow_dispatch
   
 env:
   CARGO_TERM_COLOR: always
+  capn_url: https://capnproto.org/capnproto-c++-win32-1.0.2.zip
+  capn_path: capnproto-tools-win32-1.0.2
+  capn_bin: capnp.exe
 
 jobs:
   client_matrix:
@@ -15,10 +18,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    # - name: Install Cap'n Proto
+    #   run: choco install capnproto
     - name: Install Cap'n Proto
-      run: choco install capnproto
+      uses: engineerd/configurator@v0.0.1
+      with:
+        name: ${{ env.capn_bin }}
+        url: ${{ env.capn_url}}
+        pathInArchive: ${{ env.capn_path }}
+
     - name: run capnp.exe --help
       run: capnp.exe --help
+      
     - if: matrix.rust_channel == 'nightly'
       name: Install Nightly Toolchain
       run: rustup toolchain install nightly
