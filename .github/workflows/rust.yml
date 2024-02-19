@@ -21,7 +21,7 @@ jobs:
     # - name: Install Cap'n Proto
     #   run: choco install capnproto
     - name: Install Cap'n Proto
-      uses: engineerd/configurator@v0.0.1
+      uses: engineerd/configurator@v0.0.10
       with:
         name: ${{ env.capn_bin }}
         url: ${{ env.capn_url}}
@@ -29,7 +29,7 @@ jobs:
 
     - name: run capnp.exe --help
       run: capnp.exe --help
-      
+
     - if: matrix.rust_channel == 'nightly'
       name: Install Nightly Toolchain
       run: rustup toolchain install nightly
