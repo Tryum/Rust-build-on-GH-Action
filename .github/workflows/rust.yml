@@ -48,3 +48,9 @@ jobs:
         name: Release Build-${{ env.APP_VERSION }}-${{ matrix.rust_channel }}
         path: target/release
         retention-days: 5
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/v*')
+      with:
+        files: target\release\Rust-build-on-GH-Action.exe
