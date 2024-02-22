@@ -1,6 +1,10 @@
 name: Rust
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
   
 env:
   CARGO_TERM_COLOR: always
