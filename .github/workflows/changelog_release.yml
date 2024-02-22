@@ -1,0 +1,25 @@
+name: Changelog Release
+
+on: 
+  push:
+    tags:
+      - "v*"
+jobs:
+    release_readme:
+        permissions:
+            contents: write
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Generate changelog
+              run : |
+                firstTag=$(git tag --sort=-committerdate | head -1)
+                secondTag=$(git tag --sort=-committerdate | head -2 | tail -1)
+                echo "Changes between ${secondTag} and ${firstTag}\n"
+                git log  --pretty=format:' * %s' ${secondTag}..${firstTag} > changelog.md
+
+            - name: Release
+              uses: softprops/action-gh-release@v1
+              if: startsWith(github.ref, 'refs/tags/')
+              with:
+                files: changelog.md
