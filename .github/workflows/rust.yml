@@ -14,6 +14,8 @@ env:
 
 jobs:
   client_matrix:
+    permissions:
+      contents: write
     strategy:
       matrix:
         rust_channel: ["stable", "nightly"]
