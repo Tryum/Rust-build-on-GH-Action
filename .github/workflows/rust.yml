@@ -2,6 +2,14 @@ name: Rust
 
 on: 
   workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: build type
+        options: 
+        - development
+        - production
+        - playtest
   push:
     tags:
       - "v*"
