@@ -8,6 +8,8 @@ jobs:
         steps:
             - name : Show dispatch context
               run: |
-                echo GITHUB_SHA ${{ vars.GITHUB_SHA }}
-                echo GITHUB_HEAD_REF ${{ vars.GITHUB_HEAD_REF }}
-                echo GITHUB_REF ${{ vars.GITHUB_REF }}
+                echo var.GITHUB_SHA : ${{ vars.GITHUB_SHA }}
+                echo var.GITHUB_HEAD_REF : ${{ vars.GITHUB_HEAD_REF }}
+                echo var.GITHUB_REF : ${{ vars.GITHUB_REF }}
+                echo github.head_ref : ${{ github.head_ref }}
+                echo github.ref_name : ${{ github.ref_name }}
